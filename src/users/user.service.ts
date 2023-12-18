@@ -13,26 +13,26 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
-import { UsersInterface } from './interfaces/users.interface/users.interface.interface';
+import { UserInterface } from './interfaces/users.interface/users.interface.interface';
 // import bcrypt from 'bcrypt';
 const bcrypt = require('bcrypt');
 const {tokenGenerator} = require('./helper/jwtToken');
 // import { AuthService } from 'src/auth/auth.service';
 @Injectable()
-export class UsersService {
+export class UserService {
   constructor(
-    @InjectModel('User') private readonly userModel: Model<UsersInterface>, //private authService: AuthService,
+    @InjectModel('User') private readonly UserModel: Model<UserInterface>, //private authService: AuthService,
   ) {}
   async create(createUserDto: CreateUserDto) {
     try {
-      let checkUser = await this.userModel.findOne(
+      let checkUser = await this.UserModel.findOne(
         { email: createUserDto.email.trim().toLowerCase() },
         { isDeleted: false },
       );
       if (checkUser) {
         throw new ConflictException('User already exists');
       }
-      let createdUser = new this.userModel(createUserDto);
+      let createdUser = new this.UserModel(createUserDto);
       await createdUser.save();
       return `User Account Created Successfully`;
     } catch (error) {
@@ -43,7 +43,7 @@ export class UsersService {
   // Used in middleware service
   async findOneAUth(id: String) {
     try {
-      const user = await this.userModel.findOne({ _id: id, isDeleted: false },{__v:0, password:0, isDeleted:0, createdAt:0, updatedAt:0});
+      const user = await this.UserModel.findOne({ _id: id, isDeleted: false },{__v:0, password:0, isDeleted:0, createdAt:0, updatedAt:0});
       return user;
     } catch (error) {
       throw error;
@@ -54,7 +54,7 @@ export class UsersService {
 
   async findOne(email: string, password: string): Promise<String | Object> {
     try {
-      const user = await this.userModel.findOne({
+      const user = await this.UserModel.findOne({
         email: email,
         isDeleted: false,
       });

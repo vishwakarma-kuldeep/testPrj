@@ -6,19 +6,16 @@ import {
   IsString,
 } from 'class-validator';
 
-import { ApiProperty } from '@nestjs/swagger'
-
-
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-// Prepare the docs schema
+  // Prepare the docs schema
   @ApiProperty({
     description: 'The name of the user',
     type: String,
     minLength: 3,
     maxLength: 255,
   })
-
   @IsNotEmpty()
   @IsString()
   @MinLength(3)
@@ -48,4 +45,10 @@ export class CreateUserDto {
   @MinLength(8)
   @MaxLength(20)
   readonly password: string;
+
+  constructor(name: string, email: string, password: string) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+  }
 }

@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './users/user.module';
 import { RandomJokesModule } from './random-jokes/random-jokes.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -22,7 +22,7 @@ async function bootstrap() {
       .addBearerAuth() // Add bearer auth
       .build();
     const document = SwaggerModule.createDocument(app, options, {
-      include: [UsersModule,RandomJokesModule],
+      include: [UserModule,RandomJokesModule],
     });
     SwaggerModule.setup('api-docs', app, document);
   

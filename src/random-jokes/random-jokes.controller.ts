@@ -10,7 +10,7 @@ export class RandomJokesController {
   async getJokes(@Req() req, @Res() res) {
     try {
       const jokes = await this.randomJokesService.getJokes();
-      return res.status(HttpStatus.OK).json({ jokes });
+      return res.status(HttpStatus.OK).json(jokes)
     } catch (error) {
       throw error;
     }

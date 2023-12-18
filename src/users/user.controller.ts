@@ -10,19 +10,19 @@ import {
   Delete,
   HttpStatus,
 } from '@nestjs/common';
-import { UsersService } from './users.service';
+import { UserService } from './user.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { LoginUserDto } from './dto/login-user.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 @Controller('/api/users')
-export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+export class UserController {
+  constructor(private readonly userService: UserService) {}
 
   // Creating new User
   @Post('signup')
   async create(@Req() req, @Res() res, @Body() createUserDto: CreateUserDto) {
     try {
-      const user = await this.usersService.create(createUserDto);
+      const user = await this.userService.create(createUserDto);
       if (user === 'User already exists')
         return res.status(HttpStatus.CONFLICT).json({ response: user });
       return res
@@ -35,7 +35,7 @@ export class UsersController {
   @Post('login')
   async login(@Req() req, @Res() res, @Body() loginUserDto: LoginUserDto) {
     try {
-      const user = await this.usersService.findOne(
+      const user = await this.userService.findOne(
         loginUserDto.email,
         loginUserDto.password,
       );
@@ -62,7 +62,7 @@ export class UsersController {
   @Get('me')
   async getMe(@Req() req, @Res() res) {
     try {
-      const user = await this.usersService.findOneAUth(req.user._id);
+      const user = await this.userService.findOneAUth(req.user._id);
       if (!user)
         return res
           .status(HttpStatus.NOT_FOUND)

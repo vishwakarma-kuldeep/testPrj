@@ -1,6 +1,6 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod, ExceptionFilter, Catch, ArgumentsHost, HttpException, HttpStatus , forwardRef} from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { UsersModule } from './users/users.module';
+import { UserModule } from './users/user.module';
 import { DbModule } from './db/db.module';
 import { isAuthenticated } from './app.middleware';
 import { JwtModule } from '@nestjs/jwt';
@@ -13,7 +13,7 @@ import { GlobalExceptionFilter } from './global-exception.filter';
 
 
 @Module({
-  imports: [ConfigModule.forRoot({ isGlobal: true }), DbModule, forwardRef(()=>UsersModule), RandomJokesModule,
+  imports: [ConfigModule.forRoot({ isGlobal: true }), DbModule, forwardRef(()=>UserModule), RandomJokesModule,
     JwtModule.register({
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '1d' },

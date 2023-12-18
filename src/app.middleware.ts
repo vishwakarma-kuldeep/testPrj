@@ -6,7 +6,7 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
-import { UsersService } from './users/users.service';
+import { UserService } from './users/user.service';
 
 interface UserRequest extends Request {
   user: any;
@@ -16,7 +16,7 @@ export class isAuthenticated implements NestMiddleware {
 
   constructor(
     private readonly jwt: JwtService,
-    private readonly usersService: UsersService,
+    private readonly usersService: UserService,
   ) {}
 
   async use(req: UserRequest, res: Response, next: NextFunction) {

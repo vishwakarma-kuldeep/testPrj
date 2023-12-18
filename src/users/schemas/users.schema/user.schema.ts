@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const SALT_WORK_FACTOR = 10;
 
-export const UsersSchema = new mongoose.Schema(
+export const UserSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     email: { type: String, required: true, index: true, unique: true },
@@ -15,7 +15,7 @@ export const UsersSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-UsersSchema.pre('save', async function (next: Function) {
+UserSchema.pre('save', async function (next: Function) {
   const user: any = this;
   if (!user.isModified('password')) return next();
   const salt = await bcrypt.genSalt(10);
