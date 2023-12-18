@@ -10,6 +10,7 @@ This project is a practical application built with NestJS, utilizing various dep
   - [Development](#development)
   - [Production](#production)
 - [Testing](#testing)
+- [TestingWithThunderClient](#testingwiththunderclient)
 - [API Documentation](#api-documentation)
 - [Environment Variables](#environment-variables)
 - [Dependencies](#dependencies)
@@ -46,6 +47,14 @@ To run the tests for this project, use the following command:
 ```bash
 npm run test
 ```
+## TestingWithThunderClient
+  To test the API with Thunder Client, follow these steps:
+  1. Open the Thunder Client extension in VS Code.
+  2. Go to 3 dots on the top right corner and click on Import.
+  3. Select the file `thunder-collection.json` from the test directory.
+  4. Click on the Send Request button to send the request.
+  5. The response will be displayed in the Response section.
+
 ## API Documentation
 <!-- First the user need to run the application then go to the localhost:8000/api-docs -->
 The API documentation is available at [http://localhost:8000/api-docs](http://localhost:8000/api-docs).
