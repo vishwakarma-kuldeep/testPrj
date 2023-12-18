@@ -51,7 +51,7 @@ npm run test
   To test the API with Thunder Client, follow these steps:
   1. Open the Thunder Client extension in VS Code.
   2. Go to 3 dots on the top right corner and click on Import.
-  3. Select the file `thunder-collection.json` from the test directory.
+  3. Select the file `testPrj_Collection_ThunderClient.json` from the test directory.
   4. Click on the Send Request button to send the request.
   5. The response will be displayed in the Response section.
 
