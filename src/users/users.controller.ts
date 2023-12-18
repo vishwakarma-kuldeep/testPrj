@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import {LoginUserDto} from './dto/login-user.dto'
+import { LoginUserDto } from './dto/login-user.dto';
 import { ApiBearerAuth } from '@nestjs/swagger';
 @Controller('/api/users')
 export class UsersController {
@@ -20,10 +20,8 @@ export class UsersController {
 
   // Creating new User
   @Post('signup')
- 
   async create(@Req() req, @Res() res, @Body() createUserDto: CreateUserDto) {
     try {
-
       const user = await this.usersService.create(createUserDto);
       if (user === 'User already exists')
         return res.status(HttpStatus.CONFLICT).json({ response: user });
@@ -45,18 +43,18 @@ export class UsersController {
         return res.status(HttpStatus.NOT_FOUND).json({ response: user });
       if (user === 'Password is incorrect')
         return res.status(HttpStatus.UNAUTHORIZED).json({ response: user });
+
       // return res.status(HttpStatus.OK).json({ response: user });
       // Set the token in the cookie and return the response token
-      const token = user
-      
+      const token = user;
+
       return res
         .cookie('token', token, {
           httpOnly: true,
         })
         .status(HttpStatus.OK)
-        .json({  user });
+        .json(user);
     } catch (error) {
-      
       throw error;
     }
   }
@@ -69,7 +67,7 @@ export class UsersController {
         return res
           .status(HttpStatus.NOT_FOUND)
           .json({ response: 'User not found' });
-      return res.status(HttpStatus.OK).json({ response: user });
+      return res.status(HttpStatus.OK).json(user);
     } catch (error) {
       throw error;
     }
@@ -86,7 +84,7 @@ export class UsersController {
           httpOnly: true,
         })
         .status(HttpStatus.OK)
-        .json({ response: 'User logged out successfully' });
+        .json('User logged out successfully');
     } catch (error) {
       throw error;
     }
