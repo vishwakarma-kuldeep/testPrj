@@ -44,12 +44,12 @@ export class UserController {
       if (user === 'Password is incorrect')
         return res.status(HttpStatus.UNAUTHORIZED).json({ response: user });
 
-      // return res.status(HttpStatus.OK).json({ response: user });
+      // return res.status(HttpStatus.OK).json( user );
       // Set the token in the cookie and return the response token
-      const token = user;
-
+      
+        // This is only for backend if we want to use it in frontend we have to remove the httpOnly for this the above return statement will work
       return res
-        .cookie('token', token, {
+        .cookie('token', user, {
           httpOnly: true,
         })
         .status(HttpStatus.OK)
